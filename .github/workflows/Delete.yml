@@ -1,0 +1,22 @@
+name: Delete File
+
+on:
+  workflow_dispatch:  # run manually from GitHub UI
+
+jobs:
+  delete-file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}  # or use a PAT if needed for elevated perms
+
+    - name: Delete the file
+      run: |
+        git     appgithubaction/.github/workflows/python-app.yml
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git commit -m "Delete file.txt via workflow"
+        git push
